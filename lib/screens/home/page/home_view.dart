@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/config/constants.dart';
+import 'package:movies_app/screens/home/widget/Recommended_widget.dart';
+import 'package:movies_app/screens/home/widget/display_image_widget.dart';
+import 'package:movies_app/screens/home/widget/movie_small_image.dart';
+import 'package:movies_app/screens/home/widget/name_of_movie.dart';
+import 'package:movies_app/screens/home/widget/new_releases.dart';
+import 'package:movies_app/screens/home/widget/time_of_movie.dart';
 
 class HomeView extends StatelessWidget {
   static const String routeName = "Home";
@@ -14,58 +20,33 @@ class HomeView extends StatelessWidget {
         body: Column(
           children: [
             const SizedBox(height: 50),
+
             Stack(
               clipBehavior: Clip.none,
-              // alignment: Alignment.centerLeft,
               children: [
-
                 // Display image
-                Container(
-                  width: Constants.mediaQuery.width,
-                  height: Constants.mediaQuery.height * 0.3,
-                  color: Colors.white,
-                ),
+                DisplayImageWidget(),
 
                 // movie small image
-                Positioned(
-                  left: 30,
-                  top: 160,
-                  child: Container(
-                    width: 140,
-                    height: 200,
-                    color: Colors.grey,
-                  ),
-                ),
+                MovieSmallImage(),
 
                 // Name of movie
-                Padding(
-                  padding: const EdgeInsets.only(top: 290.0, right: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text("Dora and the lost city of gold",
-                      textAlign: TextAlign.end,
-                      style: Constants.theme.textTheme.bodyMedium?.copyWith(fontSize: 17),
-                      ),
-                    ],
-                  ),
-                ),
+               NameOfMovie(),
 
                 // Time of movie
-                Padding(
-                  padding: const EdgeInsets.only(left: 175 ,top: 315.0, right: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text("2019  PG-13  2h 7m",
-                      textAlign: TextAlign.end,
-                      style: Constants.theme.textTheme.bodySmall?.copyWith(color: Color(0xffB5B4B4) ,fontSize: 17),
-                      ),
-                    ],
-                  ),
-                ),
+                TimeOfMovie(),
               ],
             ),
+            const SizedBox(height: 20),
+
+            // New Releases
+            NewReleases(),
+
+
+            const SizedBox(height: 30),
+
+            // Recommended
+            RecommendedWidget(),
           ],
         ),
       ),
