@@ -18,14 +18,7 @@ class HomeView extends StatelessWidget {
           children: [
             const SizedBox(height: 50),
 
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                // Display image
-                PopularMovies(),
-
-              ],
-            ),
+            PopularMovies(),
             const SizedBox(height: 30),
 
             // New Releases

@@ -29,14 +29,17 @@ class _PopularMoviesState extends State<PopularMovies> {
           clipBehavior: Clip.none,
           children:[
 
+            //Display Image
             Container(
               width: Constants.mediaQuery.width,
               height: 200,
               color: Colors.white,
             ),
+
+            //Small Image
             Positioned(
               top: 100,
-              left: 20,
+              left: 7,
               child: Container(
                 height: 170,
                 width: 130,
@@ -55,13 +58,19 @@ class _PopularMoviesState extends State<PopularMovies> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
 
               //Movie Name
-              Text("Dora and the lost city of gold",
-              style: Constants.theme.textTheme.bodyMedium,
-              textAlign: TextAlign.end,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("Dora and the lost city of gold",
+                  style: Constants.theme.textTheme.bodyMedium?.copyWith(fontSize: 17.5),
+                  textAlign: TextAlign.end,
+                  ),
+                ],
               ),
 
 
