@@ -15,7 +15,7 @@ class NameOfMovie extends StatelessWidget {
             "Dora and the lost city of gold",
             textAlign: TextAlign.end,
             style: Constants.theme.textTheme.bodyMedium
-                ?.copyWith(fontSize: 17),
+                ?.copyWith(fontSize: 16),
           ),
         ],
       ),

@@ -49,20 +49,20 @@ class _LayoutViewState extends State<LayoutView> {
               icon: ImageIcon(
                 AssetImage('assets/images/search_icon.png'),
               ),
-              label: "Home"),
+              label: "Search"),
           BottomNavigationBarItem(
               icon: ImageIcon(
                 AssetImage('assets/images/browse_icon.png'),
               ),
-              label: "Home"),
+              label: "Browse"),
           BottomNavigationBarItem(
               icon: ImageIcon(
                 AssetImage('assets/images/list_icon.png'),
               ),
-              label: "Home"),
+              label: "WatchList"),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              label: "Home"),
+              label: "Settings"),
         ]),
       ),
     );

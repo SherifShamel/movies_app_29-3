@@ -53,19 +53,19 @@ class ApplicationThemeManager {
 
       unselectedLabelStyle: TextStyle(
         fontFamily: "Gotham",
-        fontSize: 15,
+        fontSize: 12,
         fontWeight: FontWeight.normal,
         color: Color(0xffC6C6C6),
       ),
 
       selectedIconTheme: IconThemeData(
         color: Color(0xffFFB224),
-        size: 35,
+        size: 30,
       ),
 
       selectedLabelStyle: TextStyle(
         fontFamily: "Gotham",
-        fontSize: 17,
+        fontSize: 15,
         fontWeight: FontWeight.bold,
         color:  Color(0xffFFB224),
       ),

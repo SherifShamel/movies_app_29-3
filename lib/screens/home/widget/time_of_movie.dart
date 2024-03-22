@@ -16,7 +16,7 @@ class TimeOfMovie extends StatelessWidget {
             "2019  PG-13  2h 7m",
             textAlign: TextAlign.end,
             style: Constants.theme.textTheme.bodySmall?.copyWith(
-                color: const Color(0xffB5B4B4), fontSize: 17),
+                color: const Color(0xffB5B4B4), fontSize: 15),
           ),
         ],
       ),
