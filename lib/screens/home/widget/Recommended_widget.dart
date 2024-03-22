@@ -16,13 +16,13 @@ class RecommendedWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "New Releases",
+              "Recommended",
               textAlign: TextAlign.start,
               style: Constants.theme.textTheme.bodyMedium,
             ),
           ),
 
-          // New Releases Container
+          // Recommended Container
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
