@@ -35,7 +35,7 @@ class ApplicationThemeManager {
         ),
         bodySmall: TextStyle(
           fontFamily: "Gotham",
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w200,
           fontSize: 13,
           color: Colors.white,
         )),
