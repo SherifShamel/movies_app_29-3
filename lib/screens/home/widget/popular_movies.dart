@@ -25,69 +25,77 @@ class _PopularMoviesState extends State<PopularMovies> {
     return Column(
       children: [
         // Movie Images ( Small & Display )
-        Stack(
-          clipBehavior: Clip.none,
-          children:[
-
-            //Display Image
-            Container(
-              width: Constants.mediaQuery.width,
-              height: 200,
-              color: Colors.white,
-            ),
-
-            //Small Image
-            Positioned(
-              top: 100,
-              left: 7,
-              child: Container(
-                height: 170,
-                width: 130,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(7),
-                ),
-
-              ),
-            ),
-
-          ]
-        ),
-
-        // Movie Name & Time
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-
-              //Movie Name
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text("Dora and the lost city of gold",
-                  style: Constants.theme.textTheme.bodyMedium?.copyWith(fontSize: 17.5),
-                  textAlign: TextAlign.end,
-                  ),
-                ],
-              ),
 
 
-              const SizedBox(height: 3),
-
-              //Movie Time
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text("2019  PG-13  2h 7m",
-                  style: Constants.theme.textTheme.bodySmall,
-                  textAlign: TextAlign.end,
-                  ),
-                ],
-              ),
-            ],
+        CarouselSlider.builder(
+          itemCount: 10,
+          options: CarouselOptions(
+            autoPlay: true,
+            autoPlayAnimationDuration: Duration(seconds: 2),
+            viewportFraction: 1,
+            scrollDirection: Axis.horizontal,
           ),
+          itemBuilder: (context, index, realIndex) {
+            return Stack(clipBehavior: Clip.none, children: [
+              //Display Image
+              Container(
+                width: Constants.mediaQuery.width,
+                height: 200,
+                color: Colors.white,
+              ),
+
+              //Small Image
+              Positioned(
+                top: 90,
+                left: 7,
+                child: Container(
+                  height: 170,
+                  width: 130,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    // borderRadius: BorderRadius.circular(7),
+                  ),
+                ),
+              ),
+
+              // Movie Name & Time
+              Padding(
+                padding: const EdgeInsets.only(top: 10, right: 7),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //Movie Name
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Dora and the lost city of gold",
+                          style: Constants.theme.textTheme.bodyMedium
+                              ?.copyWith(fontSize: 17.5),
+                          textAlign: TextAlign.end,
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 3),
+
+                    //Movie Time
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "2019  PG-13  2h 7m",
+                          style: Constants.theme.textTheme.bodySmall,
+                          textAlign: TextAlign.end,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ]);
+          },
         ),
       ],
     );
