@@ -14,22 +14,24 @@ class HomeView extends StatelessWidget {
     return Container(
       color: Constants.theme.primaryColorDark,
       child: Scaffold(
-        body: Column(
-          children: [
-            const SizedBox(height: 50),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
 
-            PopularMovies(),
-            const SizedBox(height: 30),
+              PopularMovies(),
+              const SizedBox(height: 30),
 
-            // New Releases
-            NewReleases(),
+              // New Releases
+              NewReleases(),
 
 
-            const SizedBox(height: 30),
+              const SizedBox(height: 30),
 
-            // Recommended
-            RecommendedWidget(),
-          ],
+              // Recommended
+              RecommendedWidget(),
+            ],
+          ),
         ),
       ),
     );

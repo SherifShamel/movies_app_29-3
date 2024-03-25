@@ -24,7 +24,7 @@ class _PopularMoviesState extends State<PopularMovies> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Movie Images ( Small & Display )
+        // Movie Images & Name ( Small & Display )
         CarouselSlider.builder(
           itemCount: 10,
           options: CarouselOptions(
@@ -34,48 +34,15 @@ class _PopularMoviesState extends State<PopularMovies> {
             scrollDirection: Axis.horizontal,
           ),
           itemBuilder: (context, index, realIndex) {
-            return Stack(clipBehavior: Clip.none, children: [
-              //Display Image
-              Container(
-                width: Constants.mediaQuery.width,
-                height: 200,
-                // color: Colors.white,
-                child: FutureBuilder(
-                  future: PopularMovieApi.fetchPopularMovie(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return const Center(
-                        child: Text("Error"),
-                      );
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+            return Stack(
+              clipBehavior: Clip.none,
+              children: [
 
-                    var dataList = snapshot.data ?? [];
-                    var imageUrl =
-                        "${Constants.imagePath}${dataList[index].backdropPath}";
-                    return Image.network(
-                      imageUrl,
-                      fit: BoxFit.cover,
-                    );
-                  },
-                ),
-              ),
-
-              //Small Image
-              Positioned(
-                top: 90,
-                left: 7,
-                child: Container(
-                  height: 170,
-                  width: 130,
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                    // borderRadius: BorderRadius.circular(7),
-                  ),
+                //Backdrop Image
+                Container(
+                  width: Constants.mediaQuery.width,
+                  height: 160,
+                  color: Constants.theme.primaryColor,
                   child: FutureBuilder(
                     future: PopularMovieApi.fetchPopularMovie(),
                     builder: (context, snapshot) {
@@ -84,7 +51,8 @@ class _PopularMoviesState extends State<PopularMovies> {
                           child: Text("Error"),
                         );
                       }
-                      if (snapshot.connectionState == ConnectionState.waiting) {
+                      if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -92,7 +60,7 @@ class _PopularMoviesState extends State<PopularMovies> {
 
                       var dataList = snapshot.data ?? [];
                       var imageUrl =
-                          "${Constants.imagePath}${dataList[index].posterPath}";
+                          "${Constants.imagePath}${dataList[index].backdropPath}";
                       return Image.network(
                         imageUrl,
                         fit: BoxFit.cover,
@@ -100,64 +68,130 @@ class _PopularMoviesState extends State<PopularMovies> {
                     },
                   ),
                 ),
-              ),
 
-              // Movie Name & Time
-              Padding(
-                padding: const EdgeInsets.only(top: 10, right: 7),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    //Movie Name
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        FutureBuilder(
-                          future: PopularMovieApi.fetchPopularMovie(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return const Center(
-                                child: Text("Error"),
-                              );
-                            }
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-
-                            var dataList = snapshot.data ?? [];
-                            var title =
-                                dataList[index].title;
-                            return Text(title,
-                            style: Constants.theme.textTheme.bodyLarge,
-                            );
-                          },
-                        ),
-                      ],
+                // Poster Image
+                Positioned(
+                  top: 55,
+                  left: 10,
+                  child: Container(
+                    width: 130,
+                    height: 170,
+                    decoration: BoxDecoration(
+                      color: Constants.theme.primaryColorDark,
+                      borderRadius: BorderRadius.circular(7),
+                      // border: Border.all(color: Colors.white, width: 1)
                     ),
+                    child: FutureBuilder(
+                      future: PopularMovieApi.fetchPopularMovie(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return const Center(
+                            child: Text("Error"),
+                          );
+                        }
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
 
-                    const SizedBox(height: 3),
-
-                    //Movie Time
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "2019  PG-13  2h 7m",
-                          style: Constants.theme.textTheme.bodySmall,
-                          textAlign: TextAlign.end,
-                        ),
-                      ],
+                        var dataList = snapshot.data ?? [];
+                        var imageUrl =
+                            "${Constants.imagePath}${dataList[index].posterPath}";
+                        return Image.network(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                        );
+                      },
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ]);
+
+
+
+                // Movie Name & Time
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, right: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      //Movie Name
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          FutureBuilder(
+                            future: PopularMovieApi.fetchPopularMovie(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return const Center(
+                                  child: Text("Error"),
+                                );
+                              }
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+
+                              var dataList = snapshot.data ?? [];
+                              var title = dataList[index].title;
+                              return Text(
+                                title,
+                                style: Constants.theme.textTheme.bodyLarge,
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 3),
+
+                      //Movie Time
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2.0, right: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                FutureBuilder(
+                                  future: PopularMovieApi.fetchPopularMovie(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasError) {
+                                      return const Center(
+                                        child: Text("Error"),
+                                      );
+                                    }
+                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+
+                                    var dataList = snapshot.data ?? [];
+                                    var time = dataList[index].releaseDate;
+                                    return Text(
+                                      time,
+                                      style: Constants.theme.textTheme.bodySmall?.copyWith(fontSize: 10),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+              ],
+            );
           },
         ),
+
       ],
     );
   }
