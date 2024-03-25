@@ -8,7 +8,7 @@ class ApiManager {
   static const _popularUrl =
       "https://api.themoviedb.org/3/movie/popular?api_key=${Constants.apiKey}";
 
-  Future<List<MoviesModel>> getPopularMovies () async {
+ static Future<List<MoviesModel>> getPopularMovies () async {
     
     final response = await http.get(Uri.parse(_popularUrl));
     if(response.statusCode == 200){

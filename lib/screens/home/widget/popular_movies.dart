@@ -16,7 +16,7 @@ class _PopularMoviesState extends State<PopularMovies> {
 
   @override
   void initState() {
-    ApiManager().getPopularMovies();
+    ApiManager.getPopularMovies();
     super.initState();
   }
 
@@ -25,7 +25,6 @@ class _PopularMoviesState extends State<PopularMovies> {
     return Column(
       children: [
         // Movie Images ( Small & Display )
-
 
         CarouselSlider.builder(
           itemCount: 10,
@@ -42,6 +41,24 @@ class _PopularMoviesState extends State<PopularMovies> {
                 width: Constants.mediaQuery.width,
                 height: 200,
                 color: Colors.white,
+                child: FutureBuilder(
+                  future: ApiManager.getPopularMovies(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text("Error"),
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    var dataList = snapshot.data ?? [];
+                    return Image.network(
+                        "${Constants.imagePath}${dataList[index].backDropPath}");
+                  },
+                ),
               ),
 
               //Small Image
