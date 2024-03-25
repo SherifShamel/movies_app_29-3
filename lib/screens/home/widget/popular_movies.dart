@@ -28,8 +28,8 @@ class _PopularMoviesState extends State<PopularMovies> {
         CarouselSlider.builder(
           itemCount: 10,
           options: CarouselOptions(
-            autoPlay: true,
-            autoPlayAnimationDuration: Duration(seconds: 2),
+            autoPlay: false,
+            autoPlayAnimationDuration: const Duration(seconds: 2),
             viewportFraction: 1,
             scrollDirection: Axis.horizontal,
           ),
@@ -44,12 +44,12 @@ class _PopularMoviesState extends State<PopularMovies> {
                   future: PopularMovieApi.fetchPopularMovie(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Center(
+                      return const Center(
                         child: Text("Error"),
                       );
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -72,7 +72,7 @@ class _PopularMoviesState extends State<PopularMovies> {
                 child: Container(
                   height: 170,
                   width: 130,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.grey,
                     // borderRadius: BorderRadius.circular(7),
                   ),
@@ -80,12 +80,12 @@ class _PopularMoviesState extends State<PopularMovies> {
                     future: PopularMovieApi.fetchPopularMovie(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return Center(
+                        return const Center(
                           child: Text("Error"),
                         );
                       }
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }
@@ -117,21 +117,23 @@ class _PopularMoviesState extends State<PopularMovies> {
                           future: PopularMovieApi.fetchPopularMovie(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
-                              return Center(
+                              return const Center(
                                 child: Text("Error"),
                               );
                             }
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
 
                             var dataList = snapshot.data ?? [];
                             var title =
-                                "${dataList[index].title}";
-                            return Text("${title}");
+                                dataList[index].title;
+                            return Text(title,
+                            style: Constants.theme.textTheme.bodyLarge,
+                            );
                           },
                         ),
                       ],
