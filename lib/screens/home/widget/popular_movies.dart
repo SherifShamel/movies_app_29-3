@@ -12,11 +12,11 @@ class PopularMovies extends StatefulWidget {
 }
 
 class _PopularMoviesState extends State<PopularMovies> {
-  late Future<List<MoviesModel>> popularMovies;
+  late Future<List<PopularMoviesModel>> popularMovies;
 
   @override
   void initState() {
-    ApiManager.getPopularMovies();
+    PopularMovieApi.fetchPopularMovie();
     super.initState();
   }
 
@@ -25,11 +25,10 @@ class _PopularMoviesState extends State<PopularMovies> {
     return Column(
       children: [
         // Movie Images ( Small & Display )
-
         CarouselSlider.builder(
           itemCount: 10,
           options: CarouselOptions(
-            autoPlay: false,
+            autoPlay: true,
             autoPlayAnimationDuration: Duration(seconds: 2),
             viewportFraction: 1,
             scrollDirection: Axis.horizontal,
@@ -42,7 +41,7 @@ class _PopularMoviesState extends State<PopularMovies> {
                 height: 200,
                 // color: Colors.white,
                 child: FutureBuilder(
-                  future: ApiManager.getPopularMovies(),
+                  future: PopularMovieApi.fetchPopularMovie(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Center(
@@ -58,7 +57,10 @@ class _PopularMoviesState extends State<PopularMovies> {
                     var dataList = snapshot.data ?? [];
                     var imageUrl =
                         "${Constants.imagePath}${dataList[index].backdropPath}";
-                    return Image.network(imageUrl);
+                    return Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                    );
                   },
                 ),
               ),
@@ -74,6 +76,29 @@ class _PopularMoviesState extends State<PopularMovies> {
                     color: Colors.grey,
                     // borderRadius: BorderRadius.circular(7),
                   ),
+                  child: FutureBuilder(
+                    future: PopularMovieApi.fetchPopularMovie(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text("Error"),
+                        );
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      var dataList = snapshot.data ?? [];
+                      var imageUrl =
+                          "${Constants.imagePath}${dataList[index].posterPath}";
+                      return Image.network(
+                        imageUrl,
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  ),
                 ),
               ),
 
@@ -88,11 +113,26 @@ class _PopularMoviesState extends State<PopularMovies> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          "Dora and the lost city of gold",
-                          style: Constants.theme.textTheme.bodyMedium
-                              ?.copyWith(fontSize: 17.5),
-                          textAlign: TextAlign.end,
+                        FutureBuilder(
+                          future: PopularMovieApi.fetchPopularMovie(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Center(
+                                child: Text("Error"),
+                              );
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+
+                            var dataList = snapshot.data ?? [];
+                            var title =
+                                "${dataList[index].title}";
+                            return Text("${title}");
+                          },
                         ),
                       ],
                     ),
