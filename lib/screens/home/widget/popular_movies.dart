@@ -29,7 +29,7 @@ class _PopularMoviesState extends State<PopularMovies> {
         CarouselSlider.builder(
           itemCount: 10,
           options: CarouselOptions(
-            autoPlay: true,
+            autoPlay: false,
             autoPlayAnimationDuration: Duration(seconds: 2),
             viewportFraction: 1,
             scrollDirection: Axis.horizontal,
@@ -40,7 +40,7 @@ class _PopularMoviesState extends State<PopularMovies> {
               Container(
                 width: Constants.mediaQuery.width,
                 height: 200,
-                color: Colors.white,
+                // color: Colors.white,
                 child: FutureBuilder(
                   future: ApiManager.getPopularMovies(),
                   builder: (context, snapshot) {
@@ -54,9 +54,11 @@ class _PopularMoviesState extends State<PopularMovies> {
                         child: CircularProgressIndicator(),
                       );
                     }
+
                     var dataList = snapshot.data ?? [];
-                    return Image.network(
-                        "${Constants.imagePath}${dataList[index].backDropPath}");
+                    var imageUrl =
+                        "${Constants.imagePath}${dataList[index].backdropPath}";
+                    return Image.network(imageUrl);
                   },
                 ),
               ),
