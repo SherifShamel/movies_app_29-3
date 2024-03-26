@@ -41,7 +41,7 @@ class _PopularMoviesState extends State<PopularMovies> {
                 Container(
                   width: Constants.mediaQuery.width,
                   height: 160,
-                  color: Constants.theme.primaryColor,
+                  color: Constants.theme.primaryColorDark,
                   child: FutureBuilder(
                     future: PopularMovieApi.fetchPopularMovie(),
                     builder: (context, snapshot) {
