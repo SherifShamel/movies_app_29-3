@@ -49,30 +49,6 @@ class NewReleases extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          // child: FutureBuilder(
-                          //   future: PopularMovieApi.fetchUpcomingMovie(),
-                          //   builder: (context, snapshot) {
-                          //     if (snapshot.hasError) {
-                          //       return const Center(
-                          //         child: Text("Error"),
-                          //       );
-                          //     }
-                          //     if (snapshot.connectionState ==
-                          //         ConnectionState.waiting) {
-                          //       return const Center(
-                          //         child: CircularProgressIndicator(),
-                          //       );
-                          //     }
-                          //
-                          //     var dataList = snapshot.data ?? [];
-                          //     var imageUrl =
-                          //         "${Constants.imagePath}${dataList[index].posterPath}";
-                          //     return Image.network(
-                          //       imageUrl,
-                          //       fit: BoxFit.cover,
-                          //     );
-                          //   },
-                          // ),
                         ),
 
                         // Add to Favorite (Background)
