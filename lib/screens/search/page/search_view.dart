@@ -19,23 +19,15 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: const Column(
-        children: [
-          SizedBox(height: 50),
-
-          PopularMovies(),
-          SizedBox(height: 30),
-
-          // New Releases
-          NewReleases(),
-
-
-          SizedBox(height: 30),
-
-          // Recommended
-          RecommendedWidget(),
-        ],
+    return Container(
+      color: Constants.theme.primaryColorDark,
+      child: Scaffold(
+    body: Center(
+      child: Text(
+        "Search View",
+        style: Constants.theme.textTheme.titleLarge,
+      ),
+    ),
       ),
     );
   }

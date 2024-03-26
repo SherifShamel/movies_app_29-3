@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/config/constants.dart';
 
+import '../../../core/network/api_manager.dart';
+
 class NewReleases extends StatelessWidget {
   const NewReleases({super.key});
 
@@ -28,21 +30,43 @@ class NewReleases extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.only(top: 1, left: 8, right: 8, bottom: 8),
+                padding:
+                    const EdgeInsets.only(top: 1, left: 8, right: 8, bottom: 8),
                 child: Container(
                   height: 100,
-                  width: 120 ,
+                  width: 120,
                   decoration: BoxDecoration(
                     color: Constants.theme.primaryColor,
                     borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: FutureBuilder(
+                    future: PopularMovieApi.fetchPopularMovie(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return const Center(
+                          child: Text("Error"),
+                        );
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      var dataList = snapshot.data ?? [];
+                      var imageUrl =
+                          "${Constants.imagePath}${dataList[index].posterPath}";
+                      return Image.network(
+                        imageUrl,
+                        fit: BoxFit.cover,
+                      );
+                    },
                   ),
                 ),
               ),
               itemCount: 10,
             ),
           ),
-
-
         ],
       ),
     );

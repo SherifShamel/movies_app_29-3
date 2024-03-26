@@ -5,6 +5,7 @@ class PopularMoviesModel {
   String releaseDate;
   String posterPath;
   // String voteAverage;
+  String originalTitle;
 
   PopularMoviesModel({
     required this.id,
@@ -13,6 +14,8 @@ class PopularMoviesModel {
     required this.backdropPath,
     required this.posterPath,
     // required this.voteAverage,
+    required this.originalTitle,
+
   });
 
   factory PopularMoviesModel.fromJson(Map<String, dynamic> json) =>
@@ -23,5 +26,6 @@ class PopularMoviesModel {
         backdropPath: json['backdrop_path'],
         posterPath: json['poster_path'],
         // voteAverage: json['vote_average'],
+        originalTitle: json['original_title'],
       );
 }

@@ -37,7 +37,6 @@ class _PopularMoviesState extends State<PopularMovies> {
             return Stack(
               clipBehavior: Clip.none,
               children: [
-
                 //Backdrop Image
                 Container(
                   width: Constants.mediaQuery.width,
@@ -51,8 +50,7 @@ class _PopularMoviesState extends State<PopularMovies> {
                           child: Text("Error"),
                         );
                       }
-                      if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -71,43 +69,54 @@ class _PopularMoviesState extends State<PopularMovies> {
 
                 // Poster Image
                 Positioned(
-                  top: 55,
-                  left: 10,
-                  child: Container(
-                    width: 130,
-                    height: 170,
-                    decoration: BoxDecoration(
-                      color: Constants.theme.primaryColorDark,
-                      borderRadius: BorderRadius.circular(7),
-                      // border: Border.all(color: Colors.white, width: 1)
-                    ),
-                    child: FutureBuilder(
-                      future: PopularMovieApi.fetchPopularMovie(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return const Center(
-                            child: Text("Error"),
-                          );
-                        }
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
+                    top: 55,
+                    left: 10,
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 130,
+                          height: 170,
+                          decoration: BoxDecoration(
+                            color: Constants.theme.primaryColorDark,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: FutureBuilder(
+                            future: PopularMovieApi.fetchPopularMovie(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return const Center(
+                                  child: Text("Error"),
+                                );
+                              }
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
 
-                        var dataList = snapshot.data ?? [];
-                        var imageUrl =
-                            "${Constants.imagePath}${dataList[index].posterPath}";
-                        return Image.network(
-                          imageUrl,
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    ),
-                  ),
-                ),
+                              var dataList = snapshot.data ?? [];
+                              var imageUrl =
+                                  "${Constants.imagePath}${dataList[index].posterPath}";
+                              return Image.network(
+                                imageUrl,
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          ),
+                        ),
 
+                        // Add to Favorite (Background)
+                        Image.asset('assets/images/favorite.png'),
 
+                        // Add To Favorite
+                        const Positioned(
+                          left: 2,
+                          child: InkWell(
+                              child: Icon(Icons.add, color: Colors.white,)),
+                        )
+                      ],
+                    )),
 
                 // Movie Name & Time
                 Padding(
@@ -128,9 +137,10 @@ class _PopularMoviesState extends State<PopularMovies> {
                                   child: Text("Error"),
                                 );
                               }
-                              if (snapshot.connectionState == ConnectionState.waiting) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
                                 return const Center(
-                                  child: CircularProgressIndicator(),
+                                  child: CircularProgressIndicator(color: Colors.transparent),
                                 );
                               }
 
@@ -164,7 +174,8 @@ class _PopularMoviesState extends State<PopularMovies> {
                                         child: Text("Error"),
                                       );
                                     }
-                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
                                       return const Center(
                                         child: CircularProgressIndicator(),
                                       );
@@ -174,7 +185,8 @@ class _PopularMoviesState extends State<PopularMovies> {
                                     var time = dataList[index].releaseDate;
                                     return Text(
                                       time,
-                                      style: Constants.theme.textTheme.bodySmall?.copyWith(fontSize: 10),
+                                      style: Constants.theme.textTheme.bodySmall
+                                          ?.copyWith(fontSize: 10),
                                     );
                                   },
                                 ),
@@ -186,12 +198,10 @@ class _PopularMoviesState extends State<PopularMovies> {
                     ],
                   ),
                 ),
-
               ],
             );
           },
         ),
-
       ],
     );
   }
