@@ -41,7 +41,7 @@ class NewReleases extends StatelessWidget {
                           height: 150,
                           width: 120,
                           decoration: BoxDecoration(
-                            color: Constants.theme.primaryColor,
+                            color: Constants.theme.primaryColorDark,
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                               image: NetworkImage(
