@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/config/constants.dart';
 import 'package:movies_app/core/network/api_manager.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class RecommendedWidget extends StatefulWidget {
   const RecommendedWidget({super.key});
@@ -55,7 +56,10 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return Center(
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator(
+                              color: Constants.theme.primaryColor,
+                              strokeWidth: 1.0,
+                            ),
                           );
                         }
                         //Top Container
@@ -94,6 +98,8 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                         );
                       },
                     ),
+
+                    // Down Container
                     Container(
                       height: 70,
                       width: 120,
