@@ -7,7 +7,7 @@ import '../../model/movies_model.dart';
 import '../config/constants.dart';
 
 class PopularMovieApi {
-  static Future<List<PopularMoviesModel>> fetchPopularMovie() async {
+  static Future<List<MoviesModel>> fetchPopularMovie() async {
     var url = Uri.https(
       Constants.baseUrl,
       "/3/movie/popular",
@@ -24,14 +24,14 @@ class PopularMovieApi {
       },
     );
 
-    List<PopularMoviesModel> popularMoviesList = [];
+    List<MoviesModel> popularMoviesList = [];
 
     if (response.statusCode == 200) {
       // print(response.body);
       var data = jsonDecode(response.body);
       var resultsData = data["results"] as List;
       for (var e in resultsData) {
-        popularMoviesList.add(PopularMoviesModel.fromJson(e));
+        popularMoviesList.add(MoviesModel.fromJson(e));
       }
       return popularMoviesList;
     } else {
@@ -40,7 +40,7 @@ class PopularMovieApi {
   }
 
 
-  static Future<List<PopularMoviesModel>> fetchUpcomingMovie() async {
+  static Future<List<MoviesModel>> fetchUpcomingMovie() async {
     var url = Uri.https(
       Constants.baseUrl,
       "/3/movie/upcoming",
@@ -57,16 +57,16 @@ class PopularMovieApi {
       },
     );
 
-    List<PopularMoviesModel> popularMoviesList = [];
+    List<MoviesModel> upComingMovies = [];
 
     if (response.statusCode == 200) {
       // print(response.body);
       var data = jsonDecode(response.body);
       var resultsData = data["results"] as List;
       for (var e in resultsData) {
-        popularMoviesList.add(PopularMoviesModel.fromJson(e));
+        upComingMovies.add(MoviesModel.fromJson(e));
       }
-      return popularMoviesList;
+      return upComingMovies;
     } else {
       throw Exception(Exception);
     }
@@ -74,7 +74,7 @@ class PopularMovieApi {
 
 
 
-  static Future<List<PopularMoviesModel>> fetchTopRatedMovie() async {
+  static Future<List<MoviesModel>> fetchTopRatedMovie() async {
     var url = Uri.https(
       Constants.baseUrl,
       "/3/movie/top_rated",
@@ -91,20 +91,22 @@ class PopularMovieApi {
       },
     );
 
-    List<PopularMoviesModel> popularMoviesList = [];
+    List<MoviesModel> topRatedMovies = [];
 
     if (response.statusCode == 200) {
       // print(response.body);
       var data = jsonDecode(response.body);
       var resultsData = data["results"] as List;
       for (var e in resultsData) {
-        popularMoviesList.add(PopularMoviesModel.fromJson(e));
+        topRatedMovies.add(MoviesModel.fromJson(e));
       }
-      return popularMoviesList;
+      return topRatedMovies;
     } else {
       throw Exception(Exception);
     }
   }
+
+
 }
 
 

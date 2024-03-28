@@ -27,44 +27,41 @@ class _LayoutViewState extends State<LayoutView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Constants.theme.primaryColorDark,
-      child: Scaffold(
-        body: screens[currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: currentIndex,
-            onTap: (index) {
-              currentIndex = index;
-              setState(() {});
-            },
+    return Scaffold(
+      body: screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (index) {
+            currentIndex = index;
+            setState(() {});
+          },
 
-            items: const [
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/home_icon.png'),
-            ),
-            label: "Home",
+          items: const [
+        BottomNavigationBarItem(
+          icon: ImageIcon(
+            AssetImage('assets/images/home_icon.png'),
           ),
-          BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/images/search_icon.png'),
-              ),
-              label: "Search"),
-          BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/images/browse_icon.png'),
-              ),
-              label: "Browse"),
-          BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/images/list_icon.png'),
-              ),
-              label: "WatchList"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: "Settings"),
-        ]),
-      ),
+          label: "Home",
+        ),
+        BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/images/search_icon.png'),
+            ),
+            label: "Search"),
+        BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/images/browse_icon.png'),
+            ),
+            label: "Browse"),
+        BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/images/list_icon.png'),
+            ),
+            label: "WatchList"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings"),
+      ]),
     );
   }
 }

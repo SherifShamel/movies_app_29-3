@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/config/constants.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../core/network/api_manager.dart';
 
@@ -10,7 +11,7 @@ class NewReleases extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Constants.mediaQuery.width,
-      height: 200,
+      height: Constants.mediaQuery.height * 0.24,
       color: const Color(0xff282A28),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -29,6 +30,35 @@ class NewReleases extends StatelessWidget {
               child: FutureBuilder(
             future: PopularMovieApi.fetchUpcomingMovie(),
             builder: (context, snapshot) {
+              if(snapshot.hasError){
+                return Center(
+                  child: Text("Same thing went wrong"),
+                );
+              }
+              if(snapshot.connectionState == ConnectionState.waiting){
+                return Skeletonizer(
+                    enabled: true,
+                    // effect: PulseEffect(duration: Duration(seconds: 2)),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 140,
+                          width: 120,
+                          decoration: const BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ));
+              }
               return ListView.builder(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
@@ -41,7 +71,7 @@ class NewReleases extends StatelessWidget {
                           height: 150,
                           width: 120,
                           decoration: BoxDecoration(
-                            color: Constants.theme.primaryColorDark,
+                            color: Colors.grey,
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                               image: NetworkImage(
