@@ -49,7 +49,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                       future: PopularMovieApi.fetchTopRatedMovie(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
-                          return Center(
+                          return const Center(
                             child: Text("Error"),
                           );
                         }
@@ -89,10 +89,11 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                             const Positioned(
                               left: 2,
                               child: InkWell(
-                                  child: Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              )),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ],
                         );
