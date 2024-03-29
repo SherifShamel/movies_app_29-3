@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/config/constants.dart';
 import 'package:movies_app/screens/home/widget/new_releases.dart';
 import 'package:movies_app/screens/home/widget/popular_movies.dart';
-import 'package:movies_app/screens/home/widget/recommended_test.dart';
+import 'package:movies_app/screens/home/widget/recommended_view.dart';
 
 class HomeView extends StatelessWidget {
   static const String routeName = "Home";
@@ -16,11 +16,11 @@ class HomeView extends StatelessWidget {
         body: SizedBox(
           height: Constants.mediaQuery.height,
           width: Constants.mediaQuery.width,
-          child: const Column(
+          child:   Column(
             children: [
               // const SizedBox(height: 50),
 
-              PopularTest(),
+              PopularMovies(),
               SizedBox(height: 10),
 
               // New Releases
@@ -30,7 +30,9 @@ class HomeView extends StatelessWidget {
               SizedBox(height: 10),
 
               // Recommended
-              RecommendedTest(),
+              RecommendedView(),
+              // RecommendedMovies(),
+              // RecommendedSecond(),
             ],
           ),
         ),

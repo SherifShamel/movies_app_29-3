@@ -3,14 +3,14 @@ import 'package:movies_app/core/config/constants.dart';
 import 'package:movies_app/core/network/api_manager.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class RecommendedTest extends StatefulWidget {
-  const RecommendedTest({super.key});
+class RecommendedView extends StatefulWidget {
+  const RecommendedView({super.key});
 
   @override
-  State<RecommendedTest> createState() => _RecommendedTestState();
+  State<RecommendedView> createState() => _RecommendedViewState();
 }
 
-class _RecommendedTestState extends State<RecommendedTest> {
+class _RecommendedViewState extends State<RecommendedView> {
   @override
   void initState() {
     PopularMovieApi.fetchTopRatedMovie();
@@ -21,7 +21,7 @@ class _RecommendedTestState extends State<RecommendedTest> {
   Widget build(BuildContext context) {
     return Container(
       width: Constants.mediaQuery.width,
-      height: Constants.mediaQuery.height * 0.31,
+      height: Constants.mediaQuery.height * 0.32,
       color: const Color(0xff282A28),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -55,7 +55,7 @@ class _RecommendedTestState extends State<RecommendedTest> {
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 140,
+                          height: 150,
                           width: 120,
                           decoration: const BoxDecoration(
                             color: Colors.grey,
@@ -83,7 +83,7 @@ class _RecommendedTestState extends State<RecommendedTest> {
                           children: [
                             //Top Container
                             Container(
-                              height: 140,
+                              height: 160,
                               width: 120,
                               decoration: BoxDecoration(
                                 color: Colors.grey,
@@ -113,15 +113,69 @@ class _RecommendedTestState extends State<RecommendedTest> {
 
                             // Down Container
                             Positioned(
-                              top: 140,
+                              top: 155,
                               child: Container(
-                                height: 60,
+                                height: 80,
                                 width: 120,
                                 decoration: const BoxDecoration(
                                   color: Color(0xff343534),
                                   borderRadius: BorderRadius.only(
                                     bottomRight: Radius.circular(10),
                                     bottomLeft: Radius.circular(10),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 7, left: 5),
+
+                                  // Name & Vote & Date
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: [
+
+                                      // Icon & Rate
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            size: 15,
+                                            color: Constants.theme.primaryColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            '${snapshot.data?[index].voteAverage}',
+                                            style: Constants
+                                                .theme.textTheme.bodyMedium
+                                                ?.copyWith(
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.normal),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 3),
+
+                                      // Name
+                                      Text(
+                                        "${snapshot.data?[index].title}",
+                                        style: Constants
+                                            .theme.textTheme.bodySmall
+                                            ?.copyWith(fontSize: 10),
+                                      ),
+                                      const SizedBox(
+                                        height: 3,
+                                      ),
+
+                                      // Date
+                                      Text(
+                                        "${snapshot.data?[index].releaseDate}",
+                                        textAlign: TextAlign.start,
+                                        style:
+                                            Constants.theme.textTheme.bodySmall?.copyWith(fontSize: 10),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

@@ -5,6 +5,7 @@ class MoviesModel {
   String releaseDate;
   String posterPath;
   String originalTitle;
+  double voteAverage;
 
   MoviesModel({
     required this.id,
@@ -13,6 +14,7 @@ class MoviesModel {
     required this.backdropPath,
     required this.posterPath,
     required this.originalTitle,
+    required this.voteAverage
 
   });
 
@@ -24,5 +26,6 @@ class MoviesModel {
         backdropPath: json['backdrop_path'],
         posterPath: json['poster_path'],
         originalTitle: json['original_title'],
+        voteAverage: json['vote_average'],
       );
 }
