@@ -13,27 +13,29 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return  SafeArea(
       child: Scaffold(
-        body: SizedBox(
-          height: Constants.mediaQuery.height,
-          width: Constants.mediaQuery.width,
-          child:   Column(
-            children: [
-              // const SizedBox(height: 50),
+        body: SingleChildScrollView(
+          child: SizedBox( 
+            height: Constants.mediaQuery.height,
+            width: Constants.mediaQuery.width,
+            child:   Column(
+              children: [
+                // const SizedBox(height: 50),
 
-              PopularMovies(),
-              SizedBox(height: 10),
+                PopularMovies(),
+                SizedBox(height: 10),
 
-              // New Releases
-              NewReleases(),
+                // New Releases
+                NewReleases(),
 
 
-              SizedBox(height: 10),
+                SizedBox(height: 10),
 
-              // Recommended
-              RecommendedView(),
-              // RecommendedMovies(),
-              // RecommendedSecond(),
-            ],
+                // Recommended
+                RecommendedView(),
+                // RecommendedMovies(),
+                // RecommendedSecond(),
+              ],
+            ),
           ),
         ),
       ),
