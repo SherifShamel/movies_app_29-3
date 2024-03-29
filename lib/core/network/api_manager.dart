@@ -1,31 +1,114 @@
+// end point => api.themoviedb.org
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:movies_app/core/config/constants.dart';
-import 'package:movies_app/model/FinalModelTest.dart';
-import 'package:movies_app/model/movies_model.dart';
+import '../../model/movies_model.dart';
+import '../config/constants.dart';
 
-class ApiManager {
-  static Future<List<Results>> getPopularMovies() async {
-    var url = Uri.http(Constants.baseUrl, "/3/movie/popular", {
-      "apiKey": Constants.apiKey,
-      "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODllZDZlYmQ4ODcwNGE1NzFkYzVjNDViNzdlODM4YSIsInN1YiI6IjY1ZmI2NWU5NTQ1MDhkMDE3Y2Y4ZmZkYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ut5Ee5N_BejVvYFE05CoKVIxkD3V9q2oopxOSRpfZNk",
-    });
+class PopularMovieApi {
+  static Future<List<MoviesModel>> fetchPopularMovie() async {
+    var url = Uri.https(
+      Constants.baseUrl,
+      "/3/movie/popular",
+      {
+        "apiKey": Constants.apiKey,
+      },
+    );
 
-    var response = await http.get(url);
-    List<Results> moviesDataList = [];
+    final response = await http.get(
+      url,
+      headers: {
+        "Authorization":
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MGI4MGY4ZTA0OWNmNGQ3OGM1ODFhYmFkNDdlNTdmMSIsInN1YiI6IjY2MDAxYzg2MGMxMjU1MDE0YjBhZmIyMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uwe9yjQ2QKbe7_sINtF1S1BHo98FNO1FVZSLztSB1d4"
+      },
+    );
+
+    List<MoviesModel> popularMoviesList = [];
 
     if (response.statusCode == 200) {
+      // print(response.body);
       var data = jsonDecode(response.body);
-      var dataList = data["results"] as List;
-      for (var e in dataList) {
-        dataList.add(Results.fromJson(e));
+      var resultsData = data["results"] as List;
+      for (var e in resultsData) {
+        popularMoviesList.add(MoviesModel.fromJson(e));
       }
-      return moviesDataList;
+      return popularMoviesList;
     } else {
-
-      throw Exception('Failed to load album');
+      throw Exception(Exception);
     }
   }
+
+
+  static Future<List<MoviesModel>> fetchUpcomingMovie() async {
+    var url = Uri.https(
+      Constants.baseUrl,
+      "/3/movie/upcoming",
+      {
+        "apiKey": Constants.apiKey,
+      },
+    );
+
+    final response = await http.get(
+      url,
+      headers: {
+        "Authorization":
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MGI4MGY4ZTA0OWNmNGQ3OGM1ODFhYmFkNDdlNTdmMSIsInN1YiI6IjY2MDAxYzg2MGMxMjU1MDE0YjBhZmIyMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uwe9yjQ2QKbe7_sINtF1S1BHo98FNO1FVZSLztSB1d4"
+      },
+    );
+
+    List<MoviesModel> upComingMovies = [];
+
+    if (response.statusCode == 200) {
+      // print(response.body);
+      var data = jsonDecode(response.body);
+      var resultsData = data["results"] as List;
+      for (var e in resultsData) {
+        upComingMovies.add(MoviesModel.fromJson(e));
+      }
+      return upComingMovies;
+    } else {
+      throw Exception(Exception);
+    }
+  }
+
+
+
+  static Future<List<MoviesModel>> fetchTopRatedMovie() async {
+    var url = Uri.https(
+      Constants.baseUrl,
+      "/3/movie/top_rated",
+      {
+        "apiKey": Constants.apiKey,
+      },
+    );
+
+    final response = await http.get(
+      url,
+      headers: {
+        "Authorization":
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MGI4MGY4ZTA0OWNmNGQ3OGM1ODFhYmFkNDdlNTdmMSIsInN1YiI6IjY2MDAxYzg2MGMxMjU1MDE0YjBhZmIyMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uwe9yjQ2QKbe7_sINtF1S1BHo98FNO1FVZSLztSB1d4"
+      },
+    );
+
+    List<MoviesModel> topRatedMovies = [];
+
+    if (response.statusCode == 200) {
+      // print(response.body);
+      var data = jsonDecode(response.body);
+      var resultsData = data["results"] as List;
+      for (var e in resultsData) {
+        topRatedMovies.add(MoviesModel.fromJson(e));
+      }
+      return topRatedMovies;
+    } else {
+      throw Exception(Exception);
+    }
+  }
+
+
 }
+
+
+
+

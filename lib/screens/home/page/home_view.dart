@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/config/constants.dart';
-import 'package:movies_app/screens/home/widget/Recommended_widget.dart';
-import 'package:movies_app/screens/home/widget/popular_movies.dart';
 import 'package:movies_app/screens/home/widget/new_releases.dart';
+import 'package:movies_app/screens/home/widget/popular_movies.dart';
+import 'package:movies_app/screens/home/widget/recommended_view.dart';
 
 class HomeView extends StatelessWidget {
   static const String routeName = "Home";
@@ -11,25 +11,30 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Constants.theme.primaryColorDark,
+    return  SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            const SizedBox(height: 50),
+        body: SizedBox(
+          height: Constants.mediaQuery.height,
+          width: Constants.mediaQuery.width,
+          child:   Column(
+            children: [
+              // const SizedBox(height: 50),
 
-            PopularMovies(),
-            const SizedBox(height: 30),
+              PopularMovies(),
+              SizedBox(height: 10),
 
-            // New Releases
-            NewReleases(),
+              // New Releases
+              NewReleases(),
 
 
-            const SizedBox(height: 30),
+              SizedBox(height: 10),
 
-            // Recommended
-            RecommendedWidget(),
-          ],
+              // Recommended
+              RecommendedView(),
+              // RecommendedMovies(),
+              // RecommendedSecond(),
+            ],
+          ),
         ),
       ),
     );
