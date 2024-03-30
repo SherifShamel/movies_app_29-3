@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/generated/assets.dart';
 
-import '../../model/browse_movies_model.dart';
+import '../../../model/browse_movies_model.dart';
 
 class BrowseWidget extends StatelessWidget {
   final BrowseMovieModel moviesModel;
 
-  BrowseWidget({super.key, required this.moviesModel});
+  const BrowseWidget({super.key, required this.moviesModel});
 
   @override
   Widget build(BuildContext context) {

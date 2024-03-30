@@ -75,7 +75,8 @@ class NewReleases extends StatelessWidget {
                             ],
                           )),
                       itemCount: 10,
-                    ));
+                    ),
+                );
               }
               return ListView.builder(
                 scrollDirection: Axis.horizontal,

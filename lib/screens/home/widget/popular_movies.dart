@@ -33,7 +33,7 @@ class _PopularMoviesState extends State<PopularMovies> {
             future: PopularMovieApi.fetchPopularMovie(),
             builder: (context, snapshot) {
               if(snapshot.hasError){
-                return Center(
+                return const Center(
                   child: Text("Thomathing Went wrong"),
                 );
               }
@@ -132,7 +132,6 @@ class _PopularMoviesState extends State<PopularMovies> {
                                         Text("${snapshot.data?[index].releaseDate}",
                                           style: Constants.theme.textTheme.bodyLarge?.copyWith(fontSize: 13),
                                         ),
-
                                       ],
                                     ),
                                   ],

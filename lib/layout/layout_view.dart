@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/config/constants.dart';
-import 'package:movies_app/screens/browse/page/browse_view.dart';
+import 'package:movies_app/screens/browse/pages/browse_view.dart';
 import 'package:movies_app/screens/home/page/home_view.dart';
 import 'package:movies_app/screens/list/page/movies_list_view.dart';
 import 'package:movies_app/screens/search/page/search_view.dart';
